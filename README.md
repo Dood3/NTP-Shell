@@ -1,2 +1,2 @@
-# NTP-Shell
-send and execute commands via ntp
+# NTP-Shell - send and execute commands via ntp
+

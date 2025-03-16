@@ -5,4 +5,4 @@
   *ntp_implant-v0.1.py* --> No administrative rights\
   *ntp_C2-v0.1.py* &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  --> Needs administrative rights
 - 0.2
-  Added AES encryption to transmission
+  Added AES encryption for transmission

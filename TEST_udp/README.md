@@ -1,4 +1,4 @@
-# UDP-Shell - send and execute commands via udp
+# UDP-Shell (C2) - send and execute commands via udp
 
 - v0.1
   Input commands entered on the C2 are sent to the implant. The C2 provides the output (quick and dirty).\

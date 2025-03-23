@@ -5,12 +5,12 @@ If satellite gets stuck, "Enter" in the terminal.\
 *Homebase: Kali*
 *Satellite: Windows*
 
---> Homebase:
+--> Homebase:\
 DS_ntp_hb_single-0.1.py
 DS_ntp_hb_single-DEBUG-0.1.py
 
 
---> Satellite:
+--> Satellite:\
 DS_ntp_sat_single-0.1.py
 DS_ntp_sat_single-DEBUG-0.1.py
 

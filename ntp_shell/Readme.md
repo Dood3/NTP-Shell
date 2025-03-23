@@ -2,7 +2,7 @@
 Single client;\
 Scripts with DEBUG - lots of printing statements for debugging.\
 If satellite gets stuck, "Enter" in the terminal.\
-*Homebase: Kali*
+*Homebase: Kali*\
 *Satellite: Windows*
 
 --> Homebase:\

@@ -6,12 +6,12 @@ If satellite gets stuck, "Enter" in the terminal.\
 *Satellite: Windows*
 
 --> Homebase:\
-DS_ntp_hb_single-0.1.py
+DS_ntp_hb_single-0.1.py\
 DS_ntp_hb_single-DEBUG-0.1.py
 
 
 --> Satellite:\
-DS_ntp_sat_single-0.1.py
+DS_ntp_sat_single-0.1.py\
 DS_ntp_sat_single-DEBUG-0.1.py
 
 ## =========== DS_0.2 ===========

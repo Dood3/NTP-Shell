@@ -3,26 +3,34 @@ import socket
 TARGET_IP = '192.168.10.25'  # Change this to your satellite IP
 TARGET_PORT = 9999
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.settimeout(5)
+class UdpHomebase:
 
-print("[*] Homebase ready. Type commands to send. Use 'exit' to quit.")
+    def udp_shelly(self):
 
-while True:
-    cmd = input("CMD> ").strip()
-    if not cmd:
-        continue
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.settimeout(5)
 
-    sock.sendto(cmd.encode(), (TARGET_IP, TARGET_PORT))
+        print("[*] Homebase ready. Type commands to send. Use 'exit' to quit.")
 
-    if cmd.lower() in ['exit', 'quit']:
-        print("[*] Exiting.")
-        break
+        while True:
+            cmd = input("CMD> ").strip()
+            if not cmd:
+                continue
 
-    try:
-        data, _ = sock.recvfrom(8192)
-        print(data.decode())
-    except socket.timeout:
-        print("[!] No response received (timeout).")
+            sock.sendto(cmd.encode(), (TARGET_IP, TARGET_PORT))
 
-sock.close()
+            if cmd.lower() in ['exit', 'quit']:
+                print("[*] Exiting.")
+                break
+
+            try:
+                data, _ = sock.recvfrom(8192)
+                print(data.decode())
+            except socket.timeout:
+                print("[!] No response received (timeout).")
+
+        sock.close() 
+
+if __name__ == '__main__':
+    a = UdpHomebase()
+    a.udp_shelly()

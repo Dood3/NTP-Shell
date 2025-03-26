@@ -3,23 +3,31 @@ import socket
 TARGET_IP = '192.168.10.25'  # Change this to your satellite's IP
 TARGET_PORT = 9999
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect((TARGET_IP, TARGET_PORT))
+class TcpHomebase:
 
-print("[*] Connected to satellite via TCP. Type commands to send. Use 'exit' to quit.")
+    def tcp_homepase(self):
 
-while True:
-    cmd = input("CMD> ").strip()
-    if not cmd:
-        continue
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((TARGET_IP, TARGET_PORT))
 
-    sock.sendall(cmd.encode())
+        print("[*] Connected to satellite via TCP. Type commands to send. Use 'exit' to quit.")
 
-    if cmd.lower() in ['exit', 'quit']:
-        print("[*] Exiting.")
-        break
+        while True:
+            cmd = input("CMD> ").strip()
+            if not cmd:
+                continue
 
-    response = sock.recv(8192)
-    print(response.decode())
+            sock.sendall(cmd.encode())
 
-sock.close()
+            if cmd.lower() in ['exit', 'quit']:
+                print("[*] Exiting.")
+                break
+
+            response = sock.recv(8192)
+            print(response.decode())
+
+        sock.close()
+
+if __name__ == '__main__':
+    a = TcpHomebase()
+    a.tcp_homepase()

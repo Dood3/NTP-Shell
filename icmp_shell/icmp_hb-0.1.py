@@ -10,7 +10,6 @@ TTL = int(64)
 interface = sys.argv[1]
 destination_ip = sys.argv[2]
 
-
 def sniffer():
     sniff(iface=interface, prn=shell, filter="icmp", store="0")
 

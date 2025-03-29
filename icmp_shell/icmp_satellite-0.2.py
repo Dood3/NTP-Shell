@@ -8,7 +8,9 @@ class IcmpShelly:
   
     def __init__(self, interface, destination_ip):
         self.ICMP_ID = 13170
+        #self.ICMP_ID = 0xBEEF  # Looks more "normal" than 13170
         self.TTL = 64
+        #self.TTL = 128         # Default Windows TTL
         self.MAX_OUTPUT = 1024
         self.interface = interface
         self.destination_ip = destination_ip
